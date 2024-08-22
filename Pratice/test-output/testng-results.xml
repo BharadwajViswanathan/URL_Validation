@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-08-22T12:56:59 IST" name="Default suite" finished-at="2024-08-22T12:57:00 IST" duration-ms="1205">
+    <groups>
+    </groups>
+    <test started-at="2024-08-22T12:56:59 IST" name="Default test" finished-at="2024-08-22T12:57:00 IST" duration-ms="1205">
+      <class name="com.testcases.URL_Verification">
+        <test-method signature="urlvalidaton(java.lang.String,java.lang.String)[pri:0, instance:com.testcases.URL_Verification@1349883]" started-at="2024-08-22T12:57:00 IST" name="urlvalidaton" data-provider="URL" finished-at="2024-08-22T12:57:00 IST" duration-ms="12" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ndh=1&cid.&chash.&as=1&id=ItcTxOm6Em6Az6x79Jc79hcePde4TQAXZya9SKmW428%3D&.chash&.cid&aamb=j8Odv6LonN4r3an7LhD3WZrU1bUpAkFkkiY1ncBR96t2PTI&aamlh=12&c.&a.&AppID=PeacockMobile-US%205.7.22%20%287442%29&CarrierName=--&DeviceName=iPhone14%2C5&OSVersion=iOS%2017.5.1&Resolution=1170x2532&RunMode=Application&TimeSinceLaunch=1047&action=loginComplete&.a&appVersion=5.7.22&browsingMethod=ios%20mobile&coppaFlag=true&countryCode=us&customerType=existing&cvsdkVersion=57.1.2&daid=00000000-0000-0000-0000-000000000000&dayHourMinute=wednesday_15_37&deviceModel=apple%3AiPhone14%2C5&deviceType=mobile%20app&linkDetails=immersive%7Cimmersive%7C%7Cmanual-login%7Cclick&loginStatus=%7Clogged%20in%7C%7C%7C%7C&mpsessionId=09012810-AF92-4210-BFC6-8909CF476A2F&mvtOptimizely=ForYouKidsProfile%7CForYouKidsProfileRetest%3Avariation_1%3BRailPlacement%7CComingSoonRailPromo%3Acontrol%3BcoviewV1%7CcoviewV1%3Avariation1%3BformerlyInCatalogue%7CformerlyInCatalogueRecs%3Avariation_1&opt.&dmp=N&.opt&pageName=peacock%3Aimmersive%3Alogin%3Aconfirmation&pageType=immersive&partitionId=xp-partition%3Ano-partition&platform=ios&profileSetting=autoplay%3Atrue%7Csubtitle%3Afalse%7Clinked%3Afalse&rsid=nbcssott&screenOrientation=portrait&serviceProfileId=5b2e634ef1a05aa7d8ffd497a5e9e60c32209af1&site=peacock&siteSection=immersive&subSection0=immersive&subSection1=login&subSection2=confirmation&territory=us&trackingId=ItcTxOm6Em6Az6x79Jc79hcePde4TQAXZya9SKmW428%3D&userEntitlement=premium&.c&ce=UTF-8&cp=foreground&mid=70109614713836496286218687626720323327&pageName=PeacockMobile-US%205.7.22%20%287442%29&pe=lnk_o&pev2=AMACTION%3AloginComplete&t=00%2F00%2F0000%2000%3A00%3A00%200%20-330]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- urlvalidaton -->
+        <test-method signature="urlvalidaton(java.lang.String,java.lang.String)[pri:0, instance:com.testcases.URL_Verification@1349883]" started-at="2024-08-22T12:57:00 IST" name="urlvalidaton" data-provider="URL" finished-at="2024-08-22T12:57:00 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ndh=1&pev2=AMACTION%3Aleftnav&mid=39412051356552413452428987752042016582&aamlh=3&aamb=6G1ynYcLPuiQxYZrsz_pkqfLG9yMXBpb2zX5dvJdYQJzPXImdj0y&pageName=Peacock%20%28Analytics%29%2F5.8.20&pe=lnk_o&t=00%2F00%2F0000%2000%3A00%3A00%200%20240&c.&linkDetails=left-nav%7C%7C2%7Csearch%7Cclick&subSection0=search&territory=us&a.&AppID=Peacock%20%28Analytics%29%205.8.20&DeviceName=4800X&OSVersion=Roku%2013.1.4-1510&Resolution=1920x1080&action=leftnav&.a&userEntitlement=premium&appVersion=5.8.20&opt.&dmp=Y&.opt&cvsdkVersion=v7.2.3&mvtOptimizely=ForYouKidsProfile%7CForYouKidsProfileRetest%3Avariation_1%3BLinearPVRControls%7CRokuLinearPVRControls%3Avariation_1%3BRailPlacement%7CComingSoonRailPromo%3Avariation_1%3BcoviewV1%7CcoviewV1%3Acontrol%3BformerlyInCatalogue%7CformerlyInCatalogueRecs%3Avariation_1%3BpzEventsFY%7CpzEventsFY%3Avariation1%3BpzFansAlsoLiked%7CpzFansAlsoLiked%3Avariation1&daid=1c9ceab6-9890-5061-a8bf-ac2c2589f555&personaId=001703f29f2ef931969d71e1c4264bb31e5db9f318223cf6669a73e26fa1ab4c&serviceProfileid=f8bf01b32209fb734dae98a93b96a1c94bf8253c&screenOrientation=landscape&mpsessionId=367f7c8c-9441-4b75-958f-4b0cc7887afd&pageType=home&pName=peacock%3Asearch&trackingID=5EkGTFMFkgSD82EvGRtkTnGRFp3Zm3uX%2BLR8FrJ8H%2BE%3D&siteSection=search&profileSetting=autoPlay%3Atrue%7Csubtitle%3Aen%7Clinked%3Afalse&dayHourMinute=tuesday_13_19&platform=roku&customerType=existing&deviceType=settop&rsid=nbcssott&countryCode=us&coppaFlag=false&site=peacock%20%28analytics%29&loginStatus=%7Clogged%20in%7C%7C%7C%7C&deviceModel=roku3A4800x&browsingMethod=roku&partitionId=no-partitionplatform=bharath&.c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- urlvalidaton -->
+        <test-method signature="urlvalidaton(java.lang.String,java.lang.String)[pri:0, instance:com.testcases.URL_Verification@1349883]" started-at="2024-08-22T12:57:00 IST" name="urlvalidaton" data-provider="URL" finished-at="2024-08-22T12:57:00 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ndh=1&pev2=AMACTION%3Aleftnav&mid=39412051356552413452428987752042016582&aamlh=3&aamb=6G1ynYcLPuiQxYZrsz_pkqfLG9yMXBpb2zX5dvJdYQJzPXImdj0y&pageName=Peacock%20%28Analytics%29%2F5.8.20&pe=lnk_o&t=00%2F00%2F0000%2000%3A00%3A00%200%20240&c.&linkDetails=left-nav%7C%7C2%7Csearch%7Cclick&subSection0=search&territory=us&a.&AppID=Peacock%20%28Analytics%29%205.8.20&DeviceName=4800X&OSVersion=Roku%2013.1.4-1510&Resolution=1920x1080&action=leftnav&.a&userEntitlement=premium&appVersion=5.8.20&opt.&dmp=Y&.opt&cvsdkVersion=v7.2.3&mvtOptimizely=ForYouKidsProfile%7CForYouKidsProfileRetest%3Avariation_1%3BLinearPVRControls%7CRokuLinearPVRControls%3Avariation_1%3BRailPlacement%7CComingSoonRailPromo%3Avariation_1%3BcoviewV1%7CcoviewV1%3Acontrol%3BformerlyInCatalogue%7CformerlyInCatalogueRecs%3Avariation_1%3BpzEventsFY%7CpzEventsFY%3Avariation1%3BpzFansAlsoLiked%7CpzFansAlsoLiked%3Avariation1&daid=1c9ceab6-9890-5061-a8bf-ac2c2589f555&personaId=001703f29f2ef931969d71e1c4264bb31e5db9f318223cf6669a73e26fa1ab4c&serviceProfileid=f8bf01b32209fb734dae98a93b96a1c94bf8253c&screenOrientation=landscape&mpsessionId=367f7c8c-9441-4b75-958f-4b0cc7887afd&pageType=home&pName=peacock%3Asearch&trackingID=5EkGTFMFkgSD82EvGRtkTnGRFp3Zm3uX%2BLR8FrJ8H%2BE%3D&siteSection=search&profileSetting=autoPlay%3Atrue%7Csubtitle%3Aen%7Clinked%3Afalse&dayHourMinute=tuesday_13_19&platform=roku&customerType=existing&deviceType=settop&rsid=nbcssott&countryCode=us&coppaFlag=false&site=peacock%20%28analytics%29&loginStatus=%7Clogged%20in%7C%7C%7C%7C&3A4800x&browsingMethod=roku&partitionId=no-partition&.c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- urlvalidaton -->
+        <test-method signature="urlvalidaton(java.lang.String,java.lang.String)[pri:0, instance:com.testcases.URL_Verification@1349883]" started-at="2024-08-22T12:57:00 IST" name="urlvalidaton" data-provider="URL" finished-at="2024-08-22T12:57:00 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ndh=1&pev2=AMACTION%3Aleftnav&mid=39412051356552413452428987752042016582&aamlh=3&aamb=6G1ynYcLPuiQxYZrsz_pkqfLG9yMXBpb2zX5dvJdYQJzPXImdj0y&pageName=Peacock%20%28Analytics%29%2F5.8.20&pe=lnk_o&t=00%2F00%2F0000%2000%3A00%3A00%200%20240&c.&linkDetails=left-nav%7C%7C2%7Csearch%7Cclick&subSection0=search&territory=us&a.&AppID=Peacock%20%28Analytics%29%205.8.20&DeviceName=4800X&OSVersion=Roku%2013.1.4-1510&Resolution=1920x1080&action=leftnav&.a&userEntitlement=premium&appVersion=5.8.20&opt.&dmp=Y&.opt&cvsdkVersion=v7.2.3&mvtOptimizely=ForYouKidsProfile%7CForYouKidsProfileRetest%3Avariation_1%3BLinearPVRControls%7CRokuLinearPVRControls%3Avariation_1%3BRailPlacement%7CComingSoonRailPromo%3Avariation_1%3BcoviewV1%7CcoviewV1%3Acontrol%3BformerlyInCatalogue%7CformerlyInCatalogueRecs%3Avariation_1%3BpzEventsFY%7CpzEventsFY%3Avariation1%3BpzFansAlsoLiked%7CpzFansAlsoLiked%3Avariation1&daid=1c9ceab6-9890-5061-a8bf-ac2c2589f555&personaId=001703f29f2ef931969d71e1c4264bb31e5db9f318223cf6669a73e26fa1ab4c&serviceProfileid=f8bf01b32209fb734dae98a93b96a1c94bf8253c&screenOrientation=landscape&mpsessionId=367f7c8c-9441-4b75-958f-4b0cc7887afd&pageType=home&pName=peacock%3Asearch&trackingID=5EkGTFMFkgSD82EvGRtkTnGRFp3Zm3uX%2BLR8FrJ8H%2BE%3D&siteSection=search&profileSetting=autoPlay%3Atrue%7Csubtitle%3Aen%7Clinked%3Afalse&dayHourMinute=tuesday_13_19&platform&customerType=existing&deviceType=settop&rsid=nbcssott&countryCode=us&coppaFlag=false&site=peacock%20%28analytics%29&loginStatus=%7Clogged%20in%7C%7C%7C%7C&deviceModel=roku3A4800x&browsingMethod=roku&partitionId=no-partition&.c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- urlvalidaton -->
+        <test-method signature="printResults()[pri:0, instance:com.testcases.URL_Verification@1349883]" started-at="2024-08-22T12:57:00 IST" name="printResults" finished-at="2024-08-22T12:57:00 IST" depends-on-methods="com.testcases.URL_Verification.urlvalidaton" duration-ms="26" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- printResults -->
+      </class> <!-- com.testcases.URL_Verification -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
