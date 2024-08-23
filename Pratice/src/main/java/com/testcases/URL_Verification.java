@@ -1,108 +1,147 @@
 package com.testcases;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class URL_Verification {
 
-	// ANSI escape codes for colored text
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_RESET = "\u001B[0m";
+    // Map to store validation results and values for each URL
+    private static Map<String, List<String>> resultsMap = new HashMap<>();
+    private static Map<String, List<String>> valueMap = new HashMap<>();
 
-	// Check and cross marks for validation
-	public static final String CHECK_MARK = ANSI_GREEN + "✔" + ANSI_RESET;
-	public static final String CROSS_MARK = ANSI_RED + "✘" + ANSI_RESET;
+    // List of standard keys to search for
+    private static final String[] STANDARD_KEYS = {
+            "pageName", "serviceProfileId", "pageType", "siteSection", "trackingId", "appVersion",
+            "cvsdkVersion", "deviceModel", "deviceType", "platform", "rsid", "territory",
+            "countryCode", "loginStatus", "screenOrientation", "userEntitlement", "customerType",
+            "dayhourminute", "profileSetting", "mpsessionId", "daid"
+    };
 
-	// Map to store validation results and values for each URL
-	private static Map<String, List<String>> resultsMap = new HashMap<>();
-	private static Map<String, List<String>> valueMap = new HashMap<>();
+    // List to store all URLs for headers
+    private static List<String> urlList = new ArrayList<>();
 
-	// List of standard keys to search for
-	private static final String[] STANDARD_KEYS = { "pageName", "serviceProfileId", "pageType", "siteSection", "trackingId",
-			"appVersion", "cvsdkVersion", "deviceModel", "deviceType", "platform", "rsid", "territory", "countryCode", "loginStatus",
-			"screenOrientation", "userEntitlement", "customerType", "dayhourminute", "profileSetting", "mpsessionId", "daid" };
-	
+    @Test(dataProviderClass = Dataprovider.class, dataProvider = "URL")
+    public static void urlValidation(String sno, String url) {
+        urlList.add(url); // Store the URL for use as header
 
-	@Test(dataProviderClass = Dataprovider.class, dataProvider = "URL")
-	public static void urlvalidaton(String sno, String url) {
-		String queryString = url;
+        String queryString = url;
 
-		// Split the query string into key-value pairs
-		String[] pairs = queryString.split("&");
+        // Split the query string into key-value pairs
+        String[] pairs = queryString.split("&");
 
-		// Map to store the key-value pairs
-		Map<String, String> fieldsMap = new HashMap<>();
+        // Map to store the key-value pairs
+        Map<String, String> fieldsMap = new HashMap<>();
 
-		for (String pair : pairs) {
-			// Split each pair by the first '=' character
-			String[] keyValue = pair.split("=", 2);
+        for (String pair : pairs) {
+            // Split each pair by the first '=' character
+            String[] keyValue = pair.split("=", 2);
 
-			// If there's a value after '=', add to the map, otherwise store "null"
-			if (keyValue.length == 2) {
-				fieldsMap.put(keyValue[0], keyValue[1]);
-			} else {
-				fieldsMap.put(keyValue[0], "null");
-			}
-		}
+            // If there's a value after '=', add to the map, otherwise store "null"
+            if (keyValue.length == 2) {
+                fieldsMap.put(keyValue[0], keyValue[1]);
+            } else {
+                fieldsMap.put(keyValue[0], "null");
+            }
+        }
 
-		// Store results and values for each standard key
-		for (String key : STANDARD_KEYS) {
-			if (!resultsMap.containsKey(key)) {
-				resultsMap.put(key, new ArrayList<>());
-				valueMap.put(key, new ArrayList<>());
-			}
+        // Store results and values for each standard key
+        for (String key : STANDARD_KEYS) {
+            if (!resultsMap.containsKey(key)) {
+                resultsMap.put(key, new ArrayList<>());
+                valueMap.put(key, new ArrayList<>());
+            }
 
-			if (fieldsMap.containsKey(key)) {
-				String value = fieldsMap.get(key);
-				resultsMap.get(key).add(value.equals("null") ? CROSS_MARK : CHECK_MARK);
-				valueMap.get(key).add(value);
-			} else {
-				resultsMap.get(key).add(CROSS_MARK);
-				valueMap.get(key).add("null");
-			}
-		}
-	}
+            if (fieldsMap.containsKey(key)) {
+                String value = fieldsMap.get(key);
+                String result = value.equals("null") ? "Fail" : "Pass";
+                resultsMap.get(key).add(result);
+                valueMap.get(key).add(value);
+            } else {
+                resultsMap.get(key).add("Fail");
+                valueMap.get(key).add("null");
+            }
+        }
+    }
 
-	@Test(dependsOnMethods = "urlvalidaton")
-	public static void printResults() {
-		// Determine column widths for proper alignment
-		int columnWidth = 25; // Adjust this as needed for your terminal size
+    @Test(dependsOnMethods = "urlValidation")
+    public static void printResults() throws IOException {
+        // Create a new Excel workbook and sheet
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("URL Validation Results");
 
-		// Print header row
-		System.out.printf("%-" + columnWidth + "s", "Name");
-		for (int i = 1; i <= resultsMap.get(STANDARD_KEYS[0]).size(); i++) {
-			System.out.printf("%-" + columnWidth + "s", "URL" + i);
-		}
-		System.out.println();
+        // Create header row
+        Row headerRow = sheet.createRow(0);
+        Cell keyHeaderCell = headerRow.createCell(0);
+        keyHeaderCell.setCellValue("Key");
 
-		// Print check/cross marks for each key across URLs
-		for (String key : STANDARD_KEYS) {
-			System.out.printf("%-" + columnWidth + "s", key);
-			for (String result : resultsMap.get(key)) {
-				System.out.printf("%-" + columnWidth + "s", result);
-			}
-			System.out.println();
-		}
+        int colNum = 1;
+        for (String url : urlList) {
+            // Column for the values
+            Cell valueHeaderCell = headerRow.createCell(colNum++);
+            valueHeaderCell.setCellValue("Values");
 
-		System.out.println("\nValues across URLs:");
+            // Column for the pass/fail status
+            Cell statusHeaderCell = headerRow.createCell(colNum++);
+            statusHeaderCell.setCellValue(url);
+        }
 
-		// Print the actual values for each key
-		for (String key : STANDARD_KEYS) {
-			System.out.printf("%-" + columnWidth + "s", key);
-			for (String value : valueMap.get(key)) {
-				if (value.equals("null")) {
-					System.out.printf("%-" + columnWidth + "s", ANSI_RED + "Value Missing" + ANSI_RESET);
-				} else {
-					System.out.printf("%-" + columnWidth + "s", value);
-				}
-			}
-			System.out.println();
-		}
-	}
+        CellStyle failStyle = workbook.createCellStyle();
+        Font failFont = workbook.createFont();
+        failFont.setColor((short) Font.COLOR_RED); // Red
+        failStyle.setFont(failFont);
+
+        // Fill in the data for each key
+        int rowNum = 1;
+        for (String key : STANDARD_KEYS) {
+            Row row = sheet.createRow(rowNum++);
+            Cell keyCell = row.createCell(0);
+            keyCell.setCellValue(key);
+
+            colNum = 1;
+            for (int i = 0; i < urlList.size(); i++) {
+                Cell valueCell = row.createCell(colNum++);
+                if(valueMap.get(key).get(i).equalsIgnoreCase("null")) {
+                valueCell.setCellValue(valueMap.get(key).get(i));
+                valueCell.setCellStyle(failStyle);
+                }
+                valueCell.setCellValue(valueMap.get(key).get(i));
+
+                Cell statusCell = row.createCell(colNum++);
+                String status = resultsMap.get(key).get(i);
+                statusCell.setCellValue(status);
+
+                // Apply the appropriate style based on the status
+                if ("Pass".equals(status)) {
+                } else {
+                    statusCell.setCellStyle(failStyle);
+                }
+            }
+        }
+
+        // Auto-size columns for better readability
+        for (int i = 0; i < urlList.size() * 2 + 1; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Write the output to a file
+        try (FileOutputStream fileOut = new FileOutputStream("URL_Validation_Results.xlsx")) {
+            workbook.write(fileOut);
+        }
+
+        // Close the workbook
+        workbook.close();
+    }
 }
