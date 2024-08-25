@@ -10,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-public class Dataprovider {
+public class Pageload_Dataprovider {
 
 	
 		@DataProvider(name = "URL")
@@ -18,7 +18,7 @@ public class Dataprovider {
 			File file=new File("./src/main/resources/URLValidations.xlsx");
 			FileInputStream fis=new FileInputStream(file);
 			XSSFWorkbook workbook=new XSSFWorkbook(fis);
-			XSSFSheet sheet=workbook.getSheet("Sheet1");
+			XSSFSheet sheet=workbook.getSheet("Pageload");
 
 			int rows=sheet.getLastRowNum();
 

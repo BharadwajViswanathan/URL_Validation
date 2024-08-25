@@ -1,5 +1,7 @@
 package com.testcases;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.EmptyFileException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -16,7 +19,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.Test;
 
-public class URL_Verification {
+public class Pageload_TC {
 
     // Map to store validation results and values for each URL
     private static Map<String, List<String>> resultsMap = new HashMap<>();
@@ -27,14 +30,14 @@ public class URL_Verification {
             "pageName", "serviceProfileId", "pageType", "siteSection", "trackingId", "appVersion",
             "cvsdkVersion", "deviceModel", "deviceType", "platform", "rsid", "territory",
             "countryCode", "loginStatus", "screenOrientation", "userEntitlement", "customerType",
-            "dayhourminute", "profileSetting", "mpsessionId", "daid"
+            "dayHourMinute", "profileSetting", "mpsessionId", "daid"
     };
 
     // List to store all URLs for headers
     private static List<String> urlList = new ArrayList<>();
 
-    @Test(dataProviderClass = Dataprovider.class, dataProvider = "URL")
-    public static void urlValidation(String sno, String url) {
+    @Test(dataProviderClass = Pageload_Dataprovider.class, dataProvider = "URL")
+    public static void urlValidation(String url) {
         urlList.add(url); // Store the URL for use as header
 
         String queryString = url;
@@ -78,9 +81,26 @@ public class URL_Verification {
 
     @Test(dependsOnMethods = "urlValidation")
     public static void printResults() throws IOException {
-        // Create a new Excel workbook and sheet
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("URL Validation Results");
+        Workbook workbook;
+        Sheet sheet;
+
+        File file = new File("./URL_Validation_Results.xlsx");
+
+        if (file.exists() && file.length() > 0) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                workbook = new XSSFWorkbook(fis);
+            } catch (EmptyFileException e) {
+                workbook = new XSSFWorkbook(); // Create a new workbook if the file is empty
+            }
+        } else {
+            workbook = new XSSFWorkbook(); // Create a new workbook if the file doesn't exist
+        }
+
+        // Check if the "PageLoad" sheet exists, and create it if it doesn't
+        sheet = workbook.getSheet("PageLoad");
+        if (sheet == null) {
+            sheet = workbook.createSheet("PageLoad");
+        }
 
         // Create header row
         Row headerRow = sheet.createRow(0);
@@ -113,19 +133,19 @@ public class URL_Verification {
             colNum = 1;
             for (int i = 0; i < urlList.size(); i++) {
                 Cell valueCell = row.createCell(colNum++);
-                if(valueMap.get(key).get(i).equalsIgnoreCase("null")) {
-                valueCell.setCellValue(valueMap.get(key).get(i));
-                valueCell.setCellStyle(failStyle);
+                if (valueMap.get(key).get(i).equalsIgnoreCase("null")) {
+                    valueCell.setCellValue(valueMap.get(key).get(i));
+                    valueCell.setCellStyle(failStyle);
+                } else {
+                    valueCell.setCellValue(valueMap.get(key).get(i));
                 }
-                valueCell.setCellValue(valueMap.get(key).get(i));
 
                 Cell statusCell = row.createCell(colNum++);
                 String status = resultsMap.get(key).get(i);
                 statusCell.setCellValue(status);
 
                 // Apply the appropriate style based on the status
-                if ("Pass".equals(status)) {
-                } else {
+                if (!"Pass".equals(status)) {
                     statusCell.setCellStyle(failStyle);
                 }
             }
@@ -137,7 +157,7 @@ public class URL_Verification {
         }
 
         // Write the output to a file
-        try (FileOutputStream fileOut = new FileOutputStream("URL_Validation_Results.xlsx")) {
+        try (FileOutputStream fileOut = new FileOutputStream(file)) {
             workbook.write(fileOut);
         }
 
